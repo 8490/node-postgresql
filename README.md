@@ -1,1 +1,2 @@
-# node-postgresql
+CLARUSWAY
+Node JS PostgreSQL Project
