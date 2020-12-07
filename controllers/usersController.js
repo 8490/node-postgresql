@@ -42,3 +42,26 @@ exports.delete_user = async (req, res) => {
     console.log("error", error);
   }
 };
+
+exports.show_edit_user_form = (req, res) => {
+  res.render("editUser");
+};
+
+//on edit request
+exports.edit_user = async (req, res) => {
+  try {
+    await UserModel.update(
+      {
+        firstName: "a",
+        lastName: "a",
+      },
+        { where: {
+          id: req.params.id,
+        },}
+    );
+    res.redirect("/users");
+  } catch (error) {
+    console.log("error", error);
+  }
+};
+
