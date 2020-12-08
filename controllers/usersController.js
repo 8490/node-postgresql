@@ -43,25 +43,40 @@ exports.delete_user = async (req, res) => {
   }
 };
 
-exports.show_edit_user_form = (req, res) => {
-  res.render("editUser");
-};
-
-//on edit request
-exports.edit_user = async (req, res) => {
+exports.show_edit_user_form = async(req, res) => {
   try {
-    await UserModel.update(
-      {
-        firstName: "a",
-        lastName: "a",
+    const user = await UserModel.findOne({
+      where: {
+        id: req.params.id,
       },
-        { where: {
-          id: req.params.id,
-        },}
-    );
-    res.redirect("/users");
+    });
+
+    res.render("editUser", { user });
   } catch (error) {
     console.log("error", error);
   }
 };
 
+//on edit request
+exports.edit_user = (req, res) => {
+  // const id = req.params.id
+  // const firstName = req.body.firstName
+  // const lastName = req.body.lastName
+  try {
+    UserModel.update(
+      {
+        firstName : req.body.firstName, lastName : req.body.lastName,
+      },
+        { where: {
+          id: req.params.id
+        }}
+    );
+    res.redirect("/users");
+  } catch (error) {
+    console.log("update error", error);
+  }
+};
+
+
+// update({firstName: req.body.first_name}, 
+// {where: { id: req.params.id}

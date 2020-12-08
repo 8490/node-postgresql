@@ -16,3 +16,5 @@ router.post("/:id/edit", usersController.edit_user);
 
 
 module.exports = router;
+
+//router.get("/:id/:firstName/:lastName/edit", usersController.show_update_user_form);
